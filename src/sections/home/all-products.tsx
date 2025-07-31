@@ -71,7 +71,7 @@ export default function AllProducts() {
           <div className="mb-8 text-center">
             <p className="text-slate-600">
               Found {filteredProducts.length} result
-              {filteredProducts.length !== 1 ? "s" : ""} for "{searchQuery}"
+              {filteredProducts.length !== 1 ? "s" : ""} for &quot;{searchQuery}&quot;
             </p>
           </div>
         )}

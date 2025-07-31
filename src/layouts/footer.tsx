@@ -97,19 +97,19 @@ export default function Footer() {
                 href="/men"
                 className="block text-slate-400 hover:text-white transition-colors"
               >
-                Men's Shoes
+                Men&apos;s Shoes
               </Link>
               <Link
                 href="/women"
                 className="block text-slate-400 hover:text-white transition-colors"
               >
-                Women's Shoes
+                Women&apos;s Shoes
               </Link>
               <Link
                 href="/kids"
                 className="block text-slate-400 hover:text-white transition-colors"
               >
-                Kids' Shoes
+                Kids&apos; Shoes
               </Link>
               <Link
                 href="/athletic"

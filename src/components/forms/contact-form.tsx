@@ -30,7 +30,7 @@ export default function ContactForm() {
     },
   });
 
-  const onSubmit = async (values: ContactFormFormData) => {
+  const onSubmit = async () => {
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));

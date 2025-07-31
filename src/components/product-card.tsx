@@ -49,8 +49,8 @@ export default function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <Card className="group cursor-pointer border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
-      <div className="relative">
+    <Card className="group border-0 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden rounded-lg">
+      <div className="relative overflow-hidden rounded-lg">
         <Image
           src={product.image || "/placeholder.svg"}
           alt={product.name}

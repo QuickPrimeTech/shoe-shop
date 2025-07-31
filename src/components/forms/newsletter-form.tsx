@@ -25,7 +25,7 @@ export default function NewsletterForm() {
     },
   });
 
-  const onSubmit = async (values: NewsletterFormData) => {
+  const onSubmit = async () => {
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -33,7 +33,7 @@ export default function NewsletterForm() {
       toast.success("Successfully subscribed!");
 
       form.reset();
-    } catch (error) {
+    } catch {
       toast.error("Subscription failed");
     }
   };

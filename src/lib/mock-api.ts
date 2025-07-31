@@ -228,9 +228,7 @@ export const mockApi = {
   },
 
   // Simulate order placement
-  async placeOrder(
-    orderData: any
-  ): Promise<{ success: boolean; orderId: string }> {
+  async placeOrder(): Promise<{ success: boolean; orderId: string }> {
     await delay(3000);
     return {
       success: true,

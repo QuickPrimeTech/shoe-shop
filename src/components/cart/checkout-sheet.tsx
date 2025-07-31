@@ -146,11 +146,7 @@ export default function CheckoutSheet({
     setIsProcessing(true);
 
     try {
-      const orderResult = await mockApi.placeOrder({
-        items: state.items,
-        total: finalTotal,
-        customerInfo: values,
-      });
+      const orderResult = await mockApi.placeOrder();
 
       if (orderResult.success) {
         setCurrentStep("confirmation");
@@ -163,7 +159,7 @@ export default function CheckoutSheet({
           form.reset();
         }, 3000);
       }
-    } catch (error) {
+    } catch {
       toast("There was an error processing your order. Please try again.");
     } finally {
       setIsProcessing(false);

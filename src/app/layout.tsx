@@ -5,7 +5,7 @@ import { SearchProvider } from "@/contexts/search-context";
 import { CartProvider } from "@/contexts/cart-context";
 import Navbar from "@/layouts/navbar";
 import Footer from "@/layouts/footer";
-import { Toaster } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,7 +37,7 @@ export default function RootLayout({
             <Navbar />
             {children}
             <Footer />
-            <Toaster position="bottom-right" />
+            <Toaster position="bottom-right" richColors />
           </CartProvider>
         </SearchProvider>
       </body>

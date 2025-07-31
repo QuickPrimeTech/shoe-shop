@@ -201,21 +201,21 @@ export default function Navbar() {
                           className="block text-lg font-medium text-slate-900 hover:text-orange-600 transition-colors py-2"
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
-                          Men's Shoes
+                          Men&apos;s Shoes
                         </Link>
                         <Link
                           href="/women"
                           className="block text-lg font-medium text-slate-900 hover:text-orange-600 transition-colors py-2"
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
-                          Women's Shoes
+                          Women&apos;s Shoes
                         </Link>
                         <Link
                           href="/kids"
                           className="block text-lg font-medium text-slate-900 hover:text-orange-600 transition-colors py-2"
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
-                          Kids' Shoes
+                          Kids&apos; Shoes
                         </Link>
                         <Link
                           href="/sale"

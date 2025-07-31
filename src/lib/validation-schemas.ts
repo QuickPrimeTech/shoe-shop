@@ -116,11 +116,6 @@ export const loginSchema = z.object({
 });
 
 // Type exports
-export type ContactFormData = z.infer<typeof contactSchema>;
-export type PaymentFormData = z.infer<typeof paymentSchema>;
 export type CheckoutFormData = z.infer<typeof checkoutSchema>;
-export type SearchFormData = z.infer<typeof searchSchema>;
 export type NewsletterFormData = z.infer<typeof newsletterSchema>;
 export type ContactFormFormData = z.infer<typeof contactFormSchema>;
-export type RegistrationFormData = z.infer<typeof registrationSchema>;
-export type LoginFormData = z.infer<typeof loginSchema>;
