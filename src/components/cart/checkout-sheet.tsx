@@ -46,7 +46,7 @@ import { useState } from "react";
 import CardInput from "@/components/forms/card-input";
 import ExpiryInput from "@/components/forms/expiry-input";
 import CVVInput from "@/components/forms/cvv-input";
-import { mockApi } from "@/lib/mock-api";
+
 import {
   checkoutSchema,
   type CheckoutFormData,
@@ -147,19 +147,15 @@ export default function CheckoutSheet({
     setIsProcessing(true);
 
     try {
-      const orderResult = await mockApi.placeOrder();
+      setCurrentStep("confirmation");
 
-      if (orderResult.success) {
-        setCurrentStep("confirmation");
-
-        setTimeout(() => {
-          toast.success("Order placed successfully!");
-          dispatch({ type: "CLEAR_CART" });
-          onOpenChange(false);
-          setCurrentStep("cart");
-          form.reset();
-        }, 3000);
-      }
+      setTimeout(() => {
+        toast.success("Order placed successfully!");
+        dispatch({ type: "CLEAR_CART" });
+        onOpenChange(false);
+        setCurrentStep("cart");
+        form.reset();
+      }, 3000);
     } catch {
       toast("There was an error processing your order. Please try again.");
     } finally {
