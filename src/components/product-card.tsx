@@ -48,8 +48,10 @@ export default function ProductCard({ product }: ProductCardProps) {
           </h3>
           <div className="flex items-center gap-1">
             <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-            <span className="text-sm font-medium">{product.rating}</span>
-            <span className="text-sm text-slate-500">({product.reviews})</span>
+            <span className="text-sm font-medium">{product.rating.rate}</span>
+            <span className="text-sm text-slate-500">
+              ({product.rating.count})
+            </span>
           </div>
         </div>
 

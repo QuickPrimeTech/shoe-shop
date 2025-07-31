@@ -2,9 +2,11 @@ export interface Product {
   id: number;
   title: string;
   price: number;
-  rating: number;
-  reviews: number;
   image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
 }
 export interface CartItem {
   id: number;

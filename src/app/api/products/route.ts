@@ -13,8 +13,6 @@ export async function POST(req: NextRequest) {
 
   const title = formData.get("title") as string;
   const price = parseFloat(formData.get("price") as string);
-  const description = formData.get("description") as string | null;
-  const category = formData.get("category") as string | null;
   const rate = formData.get("rate") as string | null;
   const count = formData.get("count") as string | null;
   const image = formData.get("image");
@@ -34,7 +32,6 @@ export async function POST(req: NextRequest) {
       });
 
     if (uploadError) {
-      console.error("Image upload failed:", uploadError);
       return NextResponse.json(
         { error: "Image upload failed" },
         { status: 500 }
@@ -62,8 +59,6 @@ export async function POST(req: NextRequest) {
       {
         title,
         price,
-        description,
-        category,
         image: imageUrl,
         rating,
       },
@@ -72,7 +67,6 @@ export async function POST(req: NextRequest) {
     .single();
 
   if (error) {
-    console.error("Failed to insert product:", error);
     return NextResponse.json(
       { error: "Failed to insert product" },
       { status: 500 }
@@ -89,8 +83,6 @@ const productSchema = z.object({
   id: z.number().optional(),
   title: z.string(),
   price: z.number(),
-  description: z.string().nullable().optional(),
-  category: z.string().nullable().optional(),
   rating: z
     .object({
       rate: z.number(),
@@ -111,16 +103,12 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const page = parseInt(searchParams.get("page") || "1");
   const perPage = parseInt(searchParams.get("limit") || "10");
-  const category = searchParams.get("category");
   const search = searchParams.get("search");
 
   let query = supabase.from("products").select("*", { count: "exact" });
 
   if (search) {
-    query = query.or(`title.ilike.%${search}%,description.ilike.%${search}%`);
-  }
-  if (category && category !== "all") {
-    query = query.eq("category", category);
+    query = query.or(`title.ilike.%${search}%`);
   }
 
   query = query
