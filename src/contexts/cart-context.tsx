@@ -2,16 +2,7 @@
 
 import type React from "react";
 import { createContext, useContext, useReducer, type ReactNode } from "react";
-
-export interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  quantity: number;
-  size?: string;
-  color?: string;
-}
+import { CartItem } from "@/types/common";
 
 interface CartState {
   items: CartItem[];

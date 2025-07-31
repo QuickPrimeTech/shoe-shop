@@ -1,5 +1,4 @@
-import LatestArrivals from "@/sections/latest-arrivals";
-import RegularProducts from "@/sections/regular-products";
+import AllProducts from "@/sections/all-products";
 
 export default function Home() {
   return (
@@ -16,8 +15,7 @@ export default function Home() {
               quality for every occasion.
             </p>
           </div>
-          <LatestArrivals />
-          <RegularProducts />
+          <AllProducts />
         </div>
       </div>
     </main>

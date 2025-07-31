@@ -6,7 +6,6 @@ export interface Product {
   rating: number;
   reviews: number;
   image: string;
-  category: "latest" | "regular";
 }
 
 const mockProducts: Product[] = [
@@ -18,7 +17,6 @@ const mockProducts: Product[] = [
     rating: 4.8,
     reviews: 324,
     image: "/placeholder.svg?height=400&width=400",
-    category: "regular",
   },
   {
     id: 2,
@@ -27,7 +25,6 @@ const mockProducts: Product[] = [
     rating: 4.6,
     reviews: 189,
     image: "/placeholder.svg?height=400&width=400",
-    category: "regular",
   },
   {
     id: 3,
@@ -36,7 +33,6 @@ const mockProducts: Product[] = [
     rating: 4.7,
     reviews: 256,
     image: "/placeholder.svg?height=400&width=400",
-    category: "regular",
   },
   {
     id: 4,
@@ -45,7 +41,6 @@ const mockProducts: Product[] = [
     rating: 4.5,
     reviews: 412,
     image: "/placeholder.svg?height=400&width=400",
-    category: "regular",
   },
   // Latest Products
   {
@@ -55,7 +50,6 @@ const mockProducts: Product[] = [
     rating: 4.9,
     reviews: 89,
     image: "/placeholder.svg?height=400&width=400",
-    category: "latest",
   },
   {
     id: 6,
@@ -64,7 +58,6 @@ const mockProducts: Product[] = [
     rating: 4.8,
     reviews: 156,
     image: "/placeholder.svg?height=400&width=400",
-    category: "latest",
   },
   {
     id: 7,
@@ -73,7 +66,6 @@ const mockProducts: Product[] = [
     rating: 4.7,
     reviews: 203,
     image: "/placeholder.svg?height=400&width=400",
-    category: "latest",
   },
   {
     id: 8,
@@ -82,7 +74,6 @@ const mockProducts: Product[] = [
     rating: 4.9,
     reviews: 127,
     image: "/placeholder.svg?height=400&width=400",
-    category: "latest",
   },
   {
     id: 9,
@@ -91,7 +82,6 @@ const mockProducts: Product[] = [
     rating: 4.6,
     reviews: 298,
     image: "/placeholder.svg?height=400&width=400",
-    category: "latest",
   },
   {
     id: 10,
@@ -100,7 +90,6 @@ const mockProducts: Product[] = [
     rating: 4.5,
     reviews: 412,
     image: "/placeholder.svg?height=400&width=400",
-    category: "latest",
   },
   // Regular Products
   {
@@ -110,7 +99,6 @@ const mockProducts: Product[] = [
     rating: 4.7,
     reviews: 567,
     image: "/placeholder.svg?height=400&width=400",
-    category: "regular",
   },
   {
     id: 12,
@@ -119,7 +107,6 @@ const mockProducts: Product[] = [
     rating: 4.8,
     reviews: 789,
     image: "/placeholder.svg?height=400&width=400",
-    category: "regular",
   },
   {
     id: 13,
@@ -128,7 +115,6 @@ const mockProducts: Product[] = [
     rating: 4.6,
     reviews: 345,
     image: "/placeholder.svg?height=400&width=400",
-    category: "regular",
   },
   {
     id: 14,
@@ -137,7 +123,6 @@ const mockProducts: Product[] = [
     rating: 4.5,
     reviews: 234,
     image: "/placeholder.svg?height=400&width=400",
-    category: "regular",
   },
   {
     id: 15,
@@ -146,7 +131,6 @@ const mockProducts: Product[] = [
     rating: 4.7,
     reviews: 156,
     image: "/placeholder.svg?height=400&width=400",
-    category: "regular",
   },
   {
     id: 16,
@@ -155,7 +139,6 @@ const mockProducts: Product[] = [
     rating: 4.8,
     reviews: 278,
     image: "/placeholder.svg?height=400&width=400",
-    category: "regular",
   },
 ];
 
@@ -168,14 +151,6 @@ export const mockApi = {
   async getAllProducts(): Promise<Product[]> {
     await delay(6500); // 6.5 second delay
     return mockProducts;
-  },
-
-  // Get products by category
-  async getProductsByCategory(
-    category: Product["category"]
-  ): Promise<Product[]> {
-    await delay(6500);
-    return mockProducts.filter((product) => product.category === category);
   },
 
   // Search products

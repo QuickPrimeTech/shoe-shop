@@ -62,7 +62,7 @@ export default function CartPopover() {
                       <div className="w-12 h-12 bg-slate-200 rounded-md flex-shrink-0"></div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium truncate">
-                          {item.name}
+                          {item.title}
                         </p>
                         <p className="text-xs text-slate-600">
                           {item.quantity}x Ksh {item.price.toLocaleString()}

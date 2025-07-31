@@ -2,22 +2,11 @@
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Star, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
 import { useCart } from "@/contexts/cart-context";
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  originalPrice?: number;
-  rating: number;
-  reviews: number;
-  image: string;
-  badge?: string;
-}
+import { Product } from "@/types/common";
 
 interface ProductCardProps {
   product: Product;
@@ -26,24 +15,18 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const { dispatch } = useCart();
 
-  const discount = product.originalPrice
-    ? Math.round(
-        ((product.originalPrice - product.price) / product.originalPrice) * 100
-      )
-    : 0;
-
   const handleAddToCart = () => {
     dispatch({
       type: "ADD_ITEM",
       payload: {
         id: product.id,
-        name: product.name,
+        title: product.title,
         price: product.price,
         image: product.image,
       },
     });
 
-    toast(`${product.name} Added to cart!`);
+    toast(`${product.title} Added to cart!`);
   };
 
   return (
@@ -51,39 +34,17 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="relative overflow-hidden rounded-lg">
         <Image
           src={product.image || "/placeholder.svg"}
-          alt={product.name}
+          alt={product.title}
           width={400}
           height={400}
           className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300"
         />
-
-        {/* Badges */}
-        <div className="absolute top-4 left-4 flex flex-col gap-2">
-          {product.badge && (
-            <Badge
-              variant={
-                product.badge.includes("OFF") ? "destructive" : "default"
-              }
-              className={`
-                ${product.badge === "NEW" ? "bg-green-600" : ""}
-                ${product.badge === "Best Seller" ? "bg-blue-600" : ""}
-                ${product.badge === "Premium" ? "bg-purple-600" : ""}
-                ${product.badge.includes("OFF") ? "bg-red-600" : ""}
-              `}
-            >
-              {product.badge}
-            </Badge>
-          )}
-          {discount > 0 && !product.badge?.includes("OFF") && (
-            <Badge variant="destructive">-{discount}%</Badge>
-          )}
-        </div>
       </div>
 
       <div className="p-6">
         <div className="flex items-center justify-between mb-2">
           <h3 className="font-semibold text-slate-900 group-hover:text-orange-600 transition-colors duration-300">
-            {product.name}
+            {product.title}
           </h3>
           <div className="flex items-center gap-1">
             <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
@@ -96,11 +57,6 @@ export default function ProductCard({ product }: ProductCardProps) {
           <span className="text-xl font-bold text-slate-900">
             Ksh {product.price.toLocaleString()}
           </span>
-          {product.originalPrice && (
-            <span className="text-sm text-slate-500 line-through">
-              Ksh {product.originalPrice.toLocaleString()}
-            </span>
-          )}
         </div>
 
         {/* Add to Cart Button */}
