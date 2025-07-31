@@ -275,14 +275,14 @@ export default function CheckoutSheet({
                       >
                         <Image
                           src={item.image || "/placeholder.svg"}
-                          alt={item.name}
+                          alt={item.title}
                           width={80}
                           height={80}
                           className="w-20 h-20 object-cover rounded-md"
                         />
                         <div className="flex-1 space-y-2">
                           <div>
-                            <h4 className="font-medium">{item.name}</h4>
+                            <h4 className="font-medium">{item.title}</h4>
                             <p className="text-sm text-slate-600">Brand</p>
                             <p className="text-sm font-semibold">
                               Ksh {item.price.toLocaleString()}

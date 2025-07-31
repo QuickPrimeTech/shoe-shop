@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { mockApi, type Product } from "@/lib/mock-api";
+import { mockApi } from "@/lib/mock-api";
+import { Product } from "@/types/common";
 
 export function useProducts() {
   const [products, setProducts] = useState<Product[]>([]);

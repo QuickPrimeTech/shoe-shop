@@ -1,18 +1,9 @@
-// Mock API functions to simulate real API calls
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
-  rating: number;
-  reviews: number;
-  image: string;
-}
-
+import { Product } from "@/types/common";
 const mockProducts: Product[] = [
   // regulared Products
   {
     id: 1,
-    name: "Air Max Pro",
+    title: "Air Max Pro",
     price: 8999,
     rating: 4.8,
     reviews: 324,
@@ -20,7 +11,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 2,
-    name: "Classic Leather",
+    title: "Classic Leather",
     price: 5999,
     rating: 4.6,
     reviews: 189,
@@ -28,7 +19,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 3,
-    name: "Urban Runner",
+    title: "Urban Runner",
     price: 6999,
     rating: 4.7,
     reviews: 256,
@@ -36,7 +27,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 4,
-    name: "Street Style",
+    title: "Street Style",
     price: 49.99,
     rating: 4.5,
     reviews: 412,
@@ -45,7 +36,7 @@ const mockProducts: Product[] = [
   // Latest Products
   {
     id: 5,
-    name: "Future Boost 2024",
+    title: "Future Boost 2024",
     price: 17999,
     rating: 4.9,
     reviews: 89,
@@ -53,7 +44,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 6,
-    name: "Quantum Leap",
+    title: "Quantum Leap",
     price: 19999,
     rating: 4.8,
     reviews: 156,
@@ -61,7 +52,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 7,
-    name: "Neo Sport",
+    title: "Neo Sport",
     price: 149.99,
     rating: 4.7,
     reviews: 203,
@@ -69,7 +60,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 8,
-    name: "Elite Runner Pro",
+    title: "Elite Runner Pro",
     price: 18999,
     rating: 4.9,
     reviews: 127,
@@ -77,7 +68,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 9,
-    name: "Comfort Max",
+    title: "Comfort Max",
     price: 11999,
     rating: 4.6,
     reviews: 298,
@@ -85,7 +76,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 10,
-    name: "Urban Flex",
+    title: "Urban Flex",
     price: 9999,
     rating: 4.5,
     reviews: 412,
@@ -94,7 +85,7 @@ const mockProducts: Product[] = [
   // Regular Products
   {
     id: 11,
-    name: "Classic Stan Smith",
+    title: "Classic Stan Smith",
     price: 8599,
     rating: 4.7,
     reviews: 567,
@@ -102,7 +93,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 12,
-    name: "Air Force 1",
+    title: "Air Force 1",
     price: 11099,
     rating: 4.8,
     reviews: 789,
@@ -110,7 +101,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 13,
-    name: "Chuck Taylor All Star",
+    title: "Chuck Taylor All Star",
     price: 6599,
     rating: 4.6,
     reviews: 345,
@@ -118,7 +109,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 14,
-    name: "Suede Classic",
+    title: "Suede Classic",
     price: 7599,
     rating: 4.5,
     reviews: 234,
@@ -126,7 +117,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 15,
-    name: "Fresh Foam X",
+    title: "Fresh Foam X",
     price: 13999,
     rating: 4.7,
     reviews: 156,
@@ -134,7 +125,7 @@ const mockProducts: Product[] = [
   },
   {
     id: 16,
-    name: "Gel-Kayano 30",
+    title: "Gel-Kayano 30",
     price: 15999,
     rating: 4.8,
     reviews: 278,
@@ -157,7 +148,7 @@ export const mockApi = {
   async searchProducts(query: string): Promise<Product[]> {
     await delay(2000); // Shorter delay for search
     return mockProducts.filter((product) =>
-      product.name.toLowerCase().includes(query.toLowerCase())
+      product.title.toLowerCase().includes(query.toLowerCase())
     );
   },
 
