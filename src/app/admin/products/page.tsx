@@ -47,7 +47,7 @@ import { ProductForm } from "./product-form";
 // Initialize Supabase client
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || "your-supabase-url",
-  process.env.NEXT_PUBLIC_SERVI_ || "your-supabase-anon-key"
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY || "your-supabase-anon-key"
 );
 
 export interface Product {
@@ -76,6 +76,7 @@ export default function ProductsAdminPage() {
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [deletingProduct, setDeletingProduct] = useState<Product | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
   // Fetch products with pagination and filters
   const fetchProducts = async () => {
@@ -110,7 +111,7 @@ export default function ProductsAdminPage() {
       const { data, error } = await supabase
         .from("products")
         .select("category")
-        .not("category", "is", null);
+        .neq("category", null); // this is correct
 
       if (error) throw error;
 
@@ -148,6 +149,9 @@ export default function ProductsAdminPage() {
     formData: Omit<Product, "id"> & { image?: File | string | null },
     isEdit = false
   ) => {
+    if (submitting) return; // prevent duplicate
+    setSubmitting(true);
+
     try {
       const data = new FormData();
       if (
@@ -195,6 +199,8 @@ export default function ProductsAdminPage() {
     } catch (error) {
       console.error("Error saving product:", error);
       toast.error("Failed to save product");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -312,6 +318,8 @@ export default function ProductsAdminPage() {
                               <Image
                                 src={product.image || "/placeholder.svg"}
                                 alt={product.title}
+                                width={40}
+                                height={40}
                                 className="h-10 w-10 rounded-md object-cover"
                               />
                             )}

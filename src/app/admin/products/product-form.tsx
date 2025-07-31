@@ -82,26 +82,7 @@ export function ProductForm({
   const handleSubmit = async (data: ProductFormData) => {
     setIsSubmitting(true);
     try {
-      const formData = new FormData();
-      formData.append("title", data.title);
-      formData.append("price", String(data.price));
-      if (data.description) formData.append("description", data.description);
-      if (data.category) formData.append("category", data.category);
-      if (data.image instanceof File) formData.append("image", data.image);
-      if (data.rating) {
-        formData.append("rate", String(data.rating.rate));
-        formData.append("count", String(data.rating.count));
-      }
-
-      const res = await fetch("/api/products", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!res.ok) throw new Error("Failed to save product");
-
-      const productData = await res.json();
-      await onSubmit(productData);
+      await onSubmit(data as Omit<Product, "id">); // only pass data to parent handler
     } catch (error) {
       console.error("Error submitting form:", error);
     } finally {
