@@ -36,7 +36,7 @@ export function ProductForm({
     defaultValues: {
       title: initialData?.title || "",
       price: initialData?.price || 0,
-      image: "",
+      image: undefined as unknown as File, // required to satisfy File type
       rating: initialData?.rating || { rate: 0, count: 0 },
     },
   });
@@ -44,7 +44,7 @@ export function ProductForm({
   const handleSubmit = async (data: ProductFormData) => {
     setIsSubmitting(true);
     try {
-      onSubmit(data as Omit<Product, "id">); // only pass data to parent handler
+      onSubmit(data as unknown as Omit<Product, "id">); // only pass data to parent handler
     } catch (error) {
     } finally {
       setIsSubmitting(false);
