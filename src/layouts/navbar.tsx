@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import {
   Sheet,
   SheetContent,
@@ -9,61 +8,24 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Search, Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import CartPopover from "@/components/cart/cart-popover";
-import SearchSuggestions from "@/components/search-suggestions";
-import { useSearch } from "@/contexts/search-context";
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 
 export default function Navbar() {
-  const { searchQuery, setSearchQuery } = useSearch();
-  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
-  const [showSuggestions, setShowSuggestions] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const searchRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        searchRef.current &&
-        !searchRef.current.contains(event.target as Node)
-      ) {
-        setShowSuggestions(false);
-        setIsSearchExpanded(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const handleSearchFocus = () => {
-    setShowSuggestions(true);
-    setIsSearchExpanded(true);
-  };
-
-  const handleSearchChange = (value: string) => {
-    setSearchQuery(value);
-    setShowSuggestions(value.length > 0);
-  };
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-slate-200">
       <div className="container mx-auto px-4">
         <div className="flex items-center h-16 gap-4">
-          {/* Logo - Always shows brand name, only shows logo when search is expanded on mobile */}
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-2 flex-shrink-0">
             <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-lg">S</span>
             </div>
-            <span
-              className={`text-xl font-bold text-slate-900 transition-opacity duration-200 ${
-                isSearchExpanded ? "lg:block hidden" : "block"
-              }`}
-            >
-              SoleStyle
-            </span>
+            <span className="text-xl font-bold text-slate-900">OpenCart</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -94,86 +56,12 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {/* Search Bar - Takes remaining space */}
-          <div className="flex-1 relative min-w-0" ref={searchRef}>
-            {!isSearchExpanded ? (
-              <div className="hidden lg:block">
-                <div className="relative">
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
-                  <Input
-                    type="text"
-                    placeholder="Search for shoes..."
-                    value={searchQuery}
-                    onChange={(e) => handleSearchChange(e.target.value)}
-                    onFocus={handleSearchFocus}
-                    className="pl-12 bg-slate-100 border-0 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-0"
-                  />
-                </div>
-                {showSuggestions && (
-                  <SearchSuggestions
-                    onSelectSuggestion={() => setShowSuggestions(false)}
-                  />
-                )}
-              </div>
-            ) : (
-              <div className="lg:hidden">
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
-                  <Input
-                    type="text"
-                    placeholder="Search shoes..."
-                    value={searchQuery}
-                    onChange={(e) => handleSearchChange(e.target.value)}
-                    onFocus={handleSearchFocus}
-                    className="pl-10 pr-10 bg-slate-100 border-0 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-0"
-                    autoFocus
-                  />
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => {
-                      setIsSearchExpanded(false);
-                      setShowSuggestions(false);
-                    }}
-                    className="absolute right-1 top-1/2 transform -translate-y-1/2 p-1 h-auto"
-                  >
-                    <X className="w-4 h-4" />
-                  </Button>
-                </div>
-                {showSuggestions && (
-                  <SearchSuggestions
-                    onSelectSuggestion={() => {
-                      setShowSuggestions(false);
-                      setIsSearchExpanded(false);
-                    }}
-                  />
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Mobile Search Icon */}
-          {!isSearchExpanded && (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsSearchExpanded(true)}
-              className="lg:hidden p-2 flex-shrink-0"
-            >
-              <Search className="w-5 h-5" />
-            </Button>
-          )}
-
-          {/* Actions - Fixed width */}
-          <div className="flex items-center gap-2 flex-shrink-0">
-            <div className={isSearchExpanded ? "hidden" : "block"}>
-              <CartPopover />
-            </div>
+          {/* Actions */}
+          <div className="flex items-center gap-2 flex-shrink-0 ml-auto">
+            <CartPopover />
 
             {/* Mobile Menu Sheet */}
-            <div
-              className={`lg:hidden ${isSearchExpanded ? "hidden" : "block"}`}
-            >
+            <div className="lg:hidden">
               <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="sm" className="p-2">

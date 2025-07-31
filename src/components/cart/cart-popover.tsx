@@ -65,7 +65,7 @@ export default function CartPopover() {
                           {item.name}
                         </p>
                         <p className="text-xs text-slate-600">
-                          {item.quantity}x ${item.price}
+                          {item.quantity}x Ksh {item.price.toLocaleString()}
                         </p>
                       </div>
                     </div>
@@ -81,7 +81,7 @@ export default function CartPopover() {
                   <div className="flex justify-between items-center mb-3">
                     <span className="font-semibold">Total:</span>
                     <span className="font-bold text-lg">
-                      ${state.total.toFixed(2)}
+                      Ksh {state.total.toLocaleString()}
                     </span>
                   </div>
 
@@ -97,6 +97,7 @@ export default function CartPopover() {
                       className="w-full bg-orange-600 hover:bg-orange-700"
                       onClick={handleCheckout}
                     >
+                      <ShoppingCart />
                       Checkout
                     </Button>
                   </div>

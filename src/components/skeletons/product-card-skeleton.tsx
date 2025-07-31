@@ -3,32 +3,33 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ProductCardSkeleton() {
   return (
-    <Card className="border-0 shadow-lg overflow-hidden">
-      <div className="relative">
+    <Card className="border-0 shadow-lg overflow-hidden rounded-lg">
+      <div className="relative overflow-hidden rounded-lg">
         <Skeleton className="w-full h-80" />
-        <div className="absolute top-4 left-4">
-          <Skeleton className="w-16 h-6 rounded-full" />
+
+        {/* Badge placeholders */}
+        <div className="absolute top-4 left-4 flex flex-col gap-2">
+          <Skeleton className="h-6 w-16 rounded-full" />
+          <Skeleton className="h-6 w-12 rounded-full" />
         </div>
       </div>
 
       <div className="p-6 space-y-4">
         <div className="flex items-center justify-between">
-          <Skeleton className="w-16 h-4" />
+          <Skeleton className="h-5 w-32" />
           <div className="flex items-center gap-1">
-            <Skeleton className="w-4 h-4 rounded-full" />
-            <Skeleton className="w-8 h-4" />
-            <Skeleton className="w-12 h-4" />
+            <Skeleton className="h-4 w-4 rounded-full" />
+            <Skeleton className="h-4 w-6" />
+            <Skeleton className="h-4 w-10" />
           </div>
         </div>
 
-        <Skeleton className="w-3/4 h-6" />
-
         <div className="flex items-center gap-2">
-          <Skeleton className="w-16 h-6" />
-          <Skeleton className="w-12 h-4" />
+          <Skeleton className="h-6 w-24" />
+          <Skeleton className="h-4 w-16" />
         </div>
 
-        <Skeleton className="w-full h-10 rounded-md" />
+        <Skeleton className="h-10 w-full rounded-md" />
       </div>
     </Card>
   );

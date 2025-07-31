@@ -35,6 +35,7 @@ import {
   ShoppingCart,
   User,
   Check,
+  PartyPopper,
 } from "lucide-react";
 import { useCart } from "@/contexts/cart-context";
 import { toast } from "sonner";
@@ -133,7 +134,7 @@ export default function CheckoutSheet({
     }
   };
 
-  const onSubmit = async (values: CheckoutFormData) => {
+  const onSubmit = async () => {
     // Validate payment fields using Zod
     const paymentFields = ["cardNumber", "expiryDate", "cvv"] as const;
     const isPaymentValid = await form.trigger(paymentFields);
@@ -262,12 +263,7 @@ export default function CheckoutSheet({
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <h3 className="font-semibold">Review Your Order</h3>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={clearCart}
-                        className="text-red-600 hover:text-red-700"
-                      >
+                      <Button variant="ghost" size="sm" onClick={clearCart}>
                         Clear All
                       </Button>
                     </div>
@@ -287,11 +283,9 @@ export default function CheckoutSheet({
                         <div className="flex-1 space-y-2">
                           <div>
                             <h4 className="font-medium">{item.name}</h4>
-                            <p className="text-sm text-slate-600">
-                              {item.brand}
-                            </p>
+                            <p className="text-sm text-slate-600">Brand</p>
                             <p className="text-sm font-semibold">
-                              ${item.price}
+                              Ksh {item.price.toLocaleString()}
                             </p>
                           </div>
 
@@ -303,7 +297,6 @@ export default function CheckoutSheet({
                                 onClick={() =>
                                   updateQuantity(item.id, item.quantity - 1)
                                 }
-                                className="h-8 w-8 p-0"
                               >
                                 <Minus className="w-3 h-3" />
                               </Button>
@@ -316,7 +309,6 @@ export default function CheckoutSheet({
                                 onClick={() =>
                                   updateQuantity(item.id, item.quantity + 1)
                                 }
-                                className="h-8 w-8 p-0"
                               >
                                 <Plus className="w-3 h-3" />
                               </Button>
@@ -326,7 +318,6 @@ export default function CheckoutSheet({
                               variant="ghost"
                               size="sm"
                               onClick={() => removeItem(item.id)}
-                              className="text-red-600 hover:text-red-700 h-8 w-8 p-0"
                             >
                               <Trash2 className="w-4 h-4" />
                             </Button>
@@ -339,27 +330,24 @@ export default function CheckoutSheet({
                     <div className="space-y-3 p-4 bg-slate-50 rounded-lg">
                       <div className="flex justify-between">
                         <span>Subtotal:</span>
-                        <span>${state.total.toFixed(2)}</span>
+                        <span>Ksh {state.total.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Shipping:</span>
-                        <span>${shipping.toFixed(2)}</span>
+                        <span>Ksh {shipping.toFixed(2)}</span>
                       </div>
                       <div className="flex justify-between">
                         <span>Tax:</span>
-                        <span>${tax.toFixed(2)}</span>
+                        <span>Ksh {tax.toFixed(2)}</span>
                       </div>
                       <Separator />
                       <div className="flex justify-between font-bold text-lg">
                         <span>Total:</span>
-                        <span>${finalTotal.toFixed(2)}</span>
+                        <span>Ksh {finalTotal.toFixed(2)}</span>
                       </div>
                     </div>
 
-                    <Button
-                      onClick={nextStep}
-                      className="w-full bg-orange-600 hover:bg-orange-700 text-lg py-6"
-                    >
+                    <Button onClick={nextStep}>
                       Continue to Contact Information
                       <ArrowRight className="ml-2 w-5 h-5" />
                     </Button>
@@ -463,28 +451,37 @@ export default function CheckoutSheet({
                                 >
                                   <FormControl>
                                     <SelectTrigger>
-                                      <SelectValue placeholder="Select state" />
+                                      <SelectValue placeholder="Select town/city" />
                                     </SelectTrigger>
                                   </FormControl>
                                   <SelectContent>
-                                    <SelectItem value="ny">New York</SelectItem>
-                                    <SelectItem value="ca">
-                                      California
+                                    <SelectItem value="nairobi">
+                                      Nairobi
                                     </SelectItem>
-                                    <SelectItem value="tx">Texas</SelectItem>
-                                    <SelectItem value="fl">Florida</SelectItem>
-                                    <SelectItem value="il">Illinois</SelectItem>
-                                    <SelectItem value="pa">
-                                      Pennsylvania
+                                    <SelectItem value="mombasa">
+                                      Mombasa
                                     </SelectItem>
-                                    <SelectItem value="oh">Ohio</SelectItem>
-                                    <SelectItem value="ga">Georgia</SelectItem>
-                                    <SelectItem value="nc">
-                                      North Carolina
+                                    <SelectItem value="kisumu">
+                                      Kisumu
                                     </SelectItem>
-                                    <SelectItem value="mi">Michigan</SelectItem>
+                                    <SelectItem value="nakuru">
+                                      Nakuru
+                                    </SelectItem>
+                                    <SelectItem value="eldoret">
+                                      Eldoret
+                                    </SelectItem>
+                                    <SelectItem value="thika">Thika</SelectItem>
+                                    <SelectItem value="kitale">
+                                      Kitale
+                                    </SelectItem>
+                                    <SelectItem value="nyeri">Nyeri</SelectItem>
+                                    <SelectItem value="meru">Meru</SelectItem>
+                                    <SelectItem value="malindi">
+                                      Malindi
+                                    </SelectItem>
                                   </SelectContent>
                                 </Select>
+
                                 <FormMessage />
                               </FormItem>
                             )}
@@ -516,10 +513,7 @@ export default function CheckoutSheet({
                         <ArrowLeft className="mr-2 w-4 h-4" />
                         Back to Cart
                       </Button>
-                      <Button
-                        onClick={nextStep}
-                        className="flex-1 bg-orange-600 hover:bg-orange-700"
-                      >
+                      <Button onClick={nextStep}>
                         Continue to Payment
                         <ArrowRight className="ml-2 w-4 h-4" />
                       </Button>
@@ -595,20 +589,20 @@ export default function CheckoutSheet({
                       <div className="space-y-3 p-4 bg-slate-50 rounded-lg">
                         <div className="flex justify-between">
                           <span>Subtotal:</span>
-                          <span>${state.total.toFixed(2)}</span>
+                          <span>Ksh {state.total.toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between">
                           <span>Shipping:</span>
-                          <span>${shipping.toFixed(2)}</span>
+                          <span>Ksh {shipping.toFixed(2)}</span>
                         </div>
                         <div className="flex justify-between">
                           <span>Tax:</span>
-                          <span>${tax.toFixed(2)}</span>
+                          <span>Ksh {tax.toFixed(2)}</span>
                         </div>
                         <Separator />
                         <div className="flex justify-between font-bold text-lg">
                           <span>Total:</span>
-                          <span>${finalTotal.toFixed(2)}</span>
+                          <span>Ksh {finalTotal.toFixed(2)}</span>
                         </div>
                       </div>
 
@@ -625,11 +619,10 @@ export default function CheckoutSheet({
                         <Button
                           type="submit"
                           disabled={isProcessing}
-                          className="flex-1 bg-orange-600 hover:bg-orange-700 text-lg py-6"
+                          className="flex-1 bg-orange-600 hover:bg-orange-700"
                         >
-                          {isProcessing
-                            ? "Processing..."
-                            : `Complete Order - $${finalTotal.toFixed(2)}`}
+                          <PartyPopper />
+                          {isProcessing ? "Processing..." : `Complete Order`}
                         </Button>
                       </div>
                     </form>
@@ -655,7 +648,7 @@ export default function CheckoutSheet({
                       <p className="text-sm text-green-800">
                         Order Total:{" "}
                         <span className="font-bold">
-                          ${finalTotal.toFixed(2)}
+                          Ksh {finalTotal.toFixed(2)}
                         </span>
                       </p>
                       <p className="text-sm text-green-800">

@@ -38,7 +38,7 @@ export default function ContactForm() {
       toast("Message sent successfully!");
 
       form.reset();
-    } catch (error) {
+    } catch {
       toast.error("Failed to send message");
     }
   };

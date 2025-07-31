@@ -11,7 +11,6 @@ import { useCart } from "@/contexts/cart-context";
 interface Product {
   id: number;
   name: string;
-  brand: string;
   price: number;
   originalPrice?: number;
   rating: number;
@@ -39,7 +38,6 @@ export default function ProductCard({ product }: ProductCardProps) {
       payload: {
         id: product.id,
         name: product.name,
-        brand: product.brand,
         price: product.price,
         image: product.image,
       },
@@ -84,9 +82,9 @@ export default function ProductCard({ product }: ProductCardProps) {
 
       <div className="p-6">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm text-slate-500 font-medium">
-            {product.brand}
-          </span>
+          <h3 className="font-semibold text-slate-900 group-hover:text-orange-600 transition-colors duration-300">
+            {product.name}
+          </h3>
           <div className="flex items-center gap-1">
             <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
             <span className="text-sm font-medium">{product.rating}</span>
@@ -94,26 +92,19 @@ export default function ProductCard({ product }: ProductCardProps) {
           </div>
         </div>
 
-        <h3 className="font-semibold text-slate-900 mb-3 group-hover:text-orange-600 transition-colors duration-300">
-          {product.name}
-        </h3>
-
         <div className="flex items-center gap-2 mb-4">
           <span className="text-xl font-bold text-slate-900">
-            ${product.price}
+            Ksh {product.price.toLocaleString()}
           </span>
           {product.originalPrice && (
             <span className="text-sm text-slate-500 line-through">
-              ${product.originalPrice}
+              Ksh {product.originalPrice.toLocaleString()}
             </span>
           )}
         </div>
 
         {/* Add to Cart Button */}
-        <Button
-          onClick={handleAddToCart}
-          className="w-full bg-orange-600 hover:bg-orange-700 text-white"
-        >
+        <Button onClick={handleAddToCart} className="w-full">
           <ShoppingCart className="w-4 h-4 mr-2" />
           Add to Cart
         </Button>

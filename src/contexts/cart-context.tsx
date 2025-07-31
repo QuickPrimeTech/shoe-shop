@@ -6,7 +6,6 @@ import { createContext, useContext, useReducer, type ReactNode } from "react";
 export interface CartItem {
   id: number;
   name: string;
-  brand: string;
   price: number;
   image: string;
   quantity: number;
